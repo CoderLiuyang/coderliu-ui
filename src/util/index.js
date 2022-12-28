@@ -114,13 +114,13 @@ export const encryption = params => {
       var data = result[ele]
       const key = CryptoJS.enc.Latin1.parse(params.key)
       var iv = key
-      // 加密
-      var encrypted = CryptoJS.AES.encrypt(data, key, {
-        iv: iv,
-        mode: CryptoJS.mode.CFB,
-        padding: CryptoJS.pad.NoPadding
-      })
-      result[ele] = encrypted.toString()
+      // 加密(先注释掉)
+      // var encrypted = CryptoJS.AES.encrypt(data, key, {
+      //   iv: iv,
+      //   mode: CryptoJS.mode.CFB,
+      //   padding: CryptoJS.pad.NoPadding
+      // })
+      // result[ele] = encrypted.toString()
     })
   }
   return result

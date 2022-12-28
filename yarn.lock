@@ -77,17 +77,14 @@
   "resolved" "https://registry.npmmirror.com/@sxzz/popperjs-es/-/popperjs-es-2.11.7.tgz"
   "version" "2.11.7"
 
-"@smallwei/avue@^3.1.4", "@smallwei/avue@^3.2.0":
-  "integrity" "sha512-gzFizmPRda92qEHRSVMwYFGv2HaCkRvEHRwYpjHYY5wv8DLOxKN8qX/Niv3Hk/oMhh2V93/PQCqpzfJbt1/+fw=="
-  "resolved" "https://registry.npmjs.org/@smallwei/avue/-/avue-3.2.0.tgz"
-  "version" "3.2.0"
+"@smallwei/avue@^3.1.4", "@smallwei/avue@3.2.6":
+  "integrity" "sha512-84+Qv1DiZOnGiD0ZuSkiEbZmGrSS75GsPQy45lRRmVnt3iw1xINSxfm7wbIkYIAFTSWqVZ9UBoOMMKwfT7/jWg=="
+  "resolved" "https://registry.npmmirror.com/@smallwei/avue/-/avue-3.2.6.tgz"
+  "version" "3.2.6"
   dependencies:
     "@element-plus/icons-vue" "^2.0.6"
-    "axios" "^0.21.1"
     "countup.js" "^1.9.3"
     "dayjs" "^1.10.4"
-    "element-plus" "^2.2.17"
-    "vue" "^3.2.37"
 
 "@types/lodash-es@*", "@types/lodash-es@^4.17.6":
   "integrity" "sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg=="
@@ -421,9 +418,9 @@
     "memoize-one" "^6.0.0"
     "normalize-wheel-es" "^1.2.0"
 
-"esbuild-darwin-64@0.15.10":
-  "integrity" "sha512-hbDJugTicqIm+WKZgp208d7FcXcaK8j2c0l+fqSJ3d2AzQAfjEYDRM3Z2oMeqSJ9uFxyj/muSACLdix7oTstRA=="
-  "resolved" "https://registry.npmjs.org/esbuild-darwin-64/-/esbuild-darwin-64-0.15.10.tgz"
+"esbuild-windows-64@0.15.10":
+  "integrity" "sha512-2H0gdsyHi5x+8lbng3hLbxDWR7mKHWh5BXZGKVG830KUmXOOWFE2YKJ4tHRkejRduOGDrBvHBriYsGtmTv3ntA=="
+  "resolved" "https://registry.npmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.15.10.tgz"
   "version" "0.15.10"
 
 "esbuild@^0.15.6":
@@ -499,11 +496,6 @@
     "graceful-fs" "^4.2.0"
     "jsonfile" "^6.0.1"
     "universalify" "^2.0.0"
-
-"fsevents@~2.3.2":
-  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="

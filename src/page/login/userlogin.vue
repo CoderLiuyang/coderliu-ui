@@ -35,35 +35,35 @@
 
       </el-input>
     </el-form-item>
-    <el-form-item v-if="website.validateCode" prop="code">
-      <el-input
-        v-model="loginForm.code"
-        :maxlength="code.len"
-        auto-complete="off"
-        placeholder="请输入验证码"
-        @keyup.enter.native="handleLogin"
-      >
-        <template #prefix>
-          <i class="icon-yanzhengma"></i>
-        </template>
-        <template #append>
-          <div class="login-code">
-            <span
-              v-if="code.type === 'text'"
-              class="login-code-img"
-              @click="refreshCode"
-            >{{ code.value }}</span
-            >
-            <img
-              v-else
-              :src="code.src"
-              class="login-code-img"
-              @click="refreshCode"
-            />
-          </div>
-        </template>
-      </el-input>
-    </el-form-item>
+<!--    <el-form-item v-if="website.validateCode" prop="code">-->
+<!--      <el-input-->
+<!--        v-model="loginForm.code"-->
+<!--        :maxlength="code.len"-->
+<!--        auto-complete="off"-->
+<!--        placeholder="请输入验证码"-->
+<!--        @keyup.enter.native="handleLogin"-->
+<!--      >-->
+<!--        <template #prefix>-->
+<!--          <i class="icon-yanzhengma"></i>-->
+<!--        </template>-->
+<!--        <template #append>-->
+<!--          <div class="login-code">-->
+<!--            <span-->
+<!--              v-if="code.type === 'text'"-->
+<!--              class="login-code-img"-->
+<!--              @click="refreshCode"-->
+<!--            >{{ code.value }}</span-->
+<!--            >-->
+<!--            <img-->
+<!--              v-else-->
+<!--              :src="code.src"-->
+<!--              class="login-code-img"-->
+<!--              @click="refreshCode"-->
+<!--            />-->
+<!--          </div>-->
+<!--        </template>-->
+<!--      </el-input>-->
+<!--    </el-form-item>-->
     <el-form-item>
       <el-button
         type="primary"
