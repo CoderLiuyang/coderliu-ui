@@ -117,9 +117,9 @@ export default {
       })
     },
     refreshToken() {
-      this.refreshTime = setInterval(() => {
-        checkToken(this.refreshLock, this.$store)
-      }, 10000)
+      // this.refreshTime = setInterval(() => {
+      //   checkToken(this.refreshLock, this.$store)
+      // }, 10000)
     }
   }
 }

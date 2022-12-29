@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
-const TokenKey = 'pig-access-token'
-const RefreshTokenKey = 'pig-refresh-token'
+const TokenKey = 'coderliu-access-token'
+const RefreshTokenKey = 'coderliu-refresh-token'
 export function getToken() {
   return Cookies.get(TokenKey)
 }

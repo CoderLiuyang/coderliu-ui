@@ -1,7 +1,7 @@
 export default {
     version: "v3.6.3", // 控制首页显示的版本号
     logo: "PIG",   // 侧边栏搜索的时候顶部展示的文案
-    key: "pig", //配置主键,目前用于存储
+    key: "coderliu", //配置主键,目前用于存储
     title: "PIG 快速开发框架",
     indexTitle: "PIG 快速开发框架",
     validateCode: true,//是否开启验证码校验
