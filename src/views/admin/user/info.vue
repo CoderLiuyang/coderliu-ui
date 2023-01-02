@@ -38,9 +38,9 @@
               </el-form-item>
               <el-form-item
                 label="用户名"
-                prop="username">
+                prop="userName">
                 <el-input
-                  v-model="userInfoForm.username"
+                  v-model="userInfoForm.userName"
                   type="text"
                   disabled>
                   <template #prefix>
@@ -138,7 +138,7 @@ export default {
       switchStatus: '',
       codeShow: false,
       userInfoForm: {
-        username: '',
+        userName: '',
         phone: '',
         avatar: ''
       },
@@ -163,7 +163,7 @@ export default {
   created() {
     // 初始化表格默认值
     this.switchStatus = 'userManager'
-    this.userInfoForm.username = this.userInfo.username
+    this.userInfoForm.userName = this.userInfo.userName
     this.userInfoForm.phone = this.userInfo.phone
     this.passwordForm.phone = this.userInfo.phone
     this.userInfoForm.avatar = this.userInfo.avatar

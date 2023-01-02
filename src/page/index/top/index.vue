@@ -27,7 +27,7 @@
         <img class="top-bar__img" :src="userInfo.avatar ? baseUrl + userInfo.avatar : '/img/head.png'">
         <el-dropdown>
           <span class="el-dropdown-link">
-            {{ userInfo.username }}
+            {{ userInfo.userName }}
           </span>
           <template #dropdown>
             <el-dropdown-menu>
