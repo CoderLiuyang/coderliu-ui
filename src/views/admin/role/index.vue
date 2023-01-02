@@ -161,8 +161,8 @@ export default {
       list: [],
       listLoading: true,
       form: {},
-      roleId: undefined,
-      roleCode: undefined,
+      id: undefined,
+      roleKey: undefined,
       rolesOptions: undefined,
       dialogPermissionVisible: false
     }

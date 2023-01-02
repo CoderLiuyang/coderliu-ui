@@ -10,13 +10,13 @@
             @click="addOrUpdateHandle(false)">
             添加
           </el-button>
-          <el-button
-            v-if="permissions.sys_menu_del"
-            icon="el-icon-refresh-left"
-            type="primary"
-            @click="handleClearMenuCache()">
-            缓存
-          </el-button>
+<!--          <el-button-->
+<!--            v-if="permissions.sys_menu_del"-->
+<!--            icon="el-icon-refresh-left"-->
+<!--            type="primary"-->
+<!--            @click="handleClearMenuCache()">-->
+<!--            缓存-->
+<!--          </el-button>-->
         </el-form-item>
       </el-form>
 
@@ -48,7 +48,7 @@
             <dict-tag :options="dicts.keepalive_status" :value="scope.row.type" />
           </template>
         </el-table-column>
-        <el-table-column prop="permission" label="权限标识" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column prop="perms" label="权限标识" :show-overflow-tooltip="true"></el-table-column>
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template #="scope">
             <el-button

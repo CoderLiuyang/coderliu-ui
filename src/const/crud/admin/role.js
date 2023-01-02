@@ -47,7 +47,7 @@ export const tableOption = {
   }, {
     width: 120,
     label: '角色标识',
-    prop: 'roleCode',
+    prop: 'roleKey',
     span: 24,
     editDisabled: true,
     rules: [{
@@ -65,7 +65,7 @@ export const tableOption = {
   }, {
     width: 150,
     label: '角色描述',
-    prop: 'roleDesc',
+    prop: 'remark',
     overHidden: true,
     span: 24,
     rules: [{
