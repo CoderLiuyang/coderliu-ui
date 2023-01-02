@@ -95,7 +95,7 @@ export const tableOption = {
   }, {
     fixed: true,
     label: '用户名',
-    prop: 'username',
+    prop: 'userName',
     editDisabled: true,
     slot: true,
     search: true,
@@ -179,7 +179,7 @@ export const tableOption = {
     }]
   }, {
     label: '状态',
-    prop: 'lockFlag',
+    prop: 'status',
     type: 'radio',
     slot: true,
     border: true,

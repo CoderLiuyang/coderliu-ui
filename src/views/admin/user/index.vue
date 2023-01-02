@@ -42,25 +42,25 @@
             @click="$refs.crud.rowAdd()"
           >添加
           </el-button>
-          <el-button
-            class="filter-item"
-            plain
-            type="primary"
-            icon="el-icon-upload"
-            @click="$refs.excelUpload.show()"
-          >导入
-          </el-button>
-          <el-button
-            class="filter-item"
-            plain
-            type="primary"
-            icon="el-icon-download"
-            @click="exportExcel"
-          >导出
-          </el-button>
+<!--          <el-button-->
+<!--            class="filter-item"-->
+<!--            plain-->
+<!--            type="primary"-->
+<!--            icon="el-icon-upload"-->
+<!--            @click="$refs.excelUpload.show()"-->
+<!--          >导入-->
+<!--          </el-button>-->
+<!--          <el-button-->
+<!--            class="filter-item"-->
+<!--            plain-->
+<!--            type="primary"-->
+<!--            icon="el-icon-download"-->
+<!--            @click="exportExcel"-->
+<!--          >导出-->
+<!--          </el-button>-->
         </template>
-        <template #username="scope">
-          <span>{{ scope.row.username }}</span>
+        <template #userName="scope">
+          <span>{{ scope.row.userName }}</span>
         </template>
         <template #role="scope">
           <span v-for="(r, index) in scope.row.roleList" :key="index">
@@ -295,7 +295,7 @@ export default {
     },
     deletes(row) {
       this.$confirm(
-        '此操作将永久删除该用户(用户名:' + row.username + '), 是否继续?',
+        '此操作将永久删除该用户(用户名:' + row.userName + '), 是否继续?',
         '提示',
         {
           confirmButtonText: '确定',
