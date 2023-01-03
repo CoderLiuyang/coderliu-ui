@@ -60,9 +60,6 @@
         <template #deptName="scope">
           {{ scope.row.deptName }}
         </template>
-        <template #lockFlag="scope">
-          <dict-tag :options="scope.dic" :value="scope.row.lockFlag" />
-        </template>
         <template #menu="scope">
           <el-button
             v-if="permissions.sys_user_edit"
@@ -80,6 +77,9 @@
             @click="deletes(scope.row, scope.index)"
           >删除
           </el-button>
+        </template>
+        <template #status="scope">
+          <dict-tag :options="scope.dic" :value="scope.row.status" />
         </template>
         <template #deptId-form>
           <avue-input-tree
