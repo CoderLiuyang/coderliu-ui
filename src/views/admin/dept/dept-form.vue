@@ -116,7 +116,7 @@ export default {
     getTreeselect() {
       fetchTree().then(response => {
         this.deptOptions = []
-        const dept = { id: '0', name: '根部门', children: response.data.data }
+        const dept = { id: '-1', name: '根部门', children: response.data.data }
         this.deptOptions.push(dept)
       })
     },
