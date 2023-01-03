@@ -24,11 +24,29 @@ export const validateUsername = (rule, value, callback) => {
   if (!flag) {
     callback(new Error('用户名支持小写英文、数字'))
   }
-  isExsit({ username: value }).then(response => {
+  isExsit({ userName: value }).then(response => {
     if (window.boxType === 'edit') callback()
     const result = response.data.data
     if (result) {
       return callback(new Error('用户名已经存在'))
+    } else {
+      return callback()
+    }
+  })
+}
+export const validateLoginName = (rule, value, callback) => {
+  if (!value) {
+    return callback(new Error('请输入登录名'))
+  }
+  const flag = new RegExp(/^([a-z\d]+?)$/).test(value)
+  if (!flag) {
+    callback(new Error('登录名支持小写英文、数字'))
+  }
+  isExsit({ longinName: value }).then(response => {
+    if (window.boxType === 'edit') callback()
+    const result = response.data.data
+    if (result) {
+      return callback(new Error('登录名已经存在'))
     } else {
       return callback()
     }
@@ -87,15 +105,16 @@ export const tableOption = {
   column: [{
     fixed: true,
     label: 'id',
-    prop: 'userId',
+    prop: 'id',
     span: 24,
     hide: true,
     editDisplay: false,
     addDisplay: false
-  }, {
+  }
+  , {
     fixed: true,
-    label: '用户名',
-    prop: 'userName',
+    label: '登陆名',
+    prop: 'loginName',
     editDisabled: true,
     slot: true,
     search: true,
@@ -110,9 +129,31 @@ export const tableOption = {
       message: '长度在 3 到 20 个字符',
       trigger: 'blur'
     },
-    { validator: validateUsername, trigger: 'blur' }
+    { validator: validateLoginName, trigger: 'blur' }
     ]
-  }, {
+  }
+    , {
+      fixed: true,
+      label: '用户名',
+      prop: 'userName',
+      editDisabled: true,
+      slot: true,
+      search: true,
+      span: 24,
+      rules: [{
+        required: true,
+        message: '请输入用户名'
+      },
+        {
+          min: 3,
+          max: 20,
+          message: '长度在 3 到 20 个字符',
+          trigger: 'blur'
+        },
+        { validator: validateUsername, trigger: 'blur' }
+      ]
+    }
+  , {
     label: '密码',
     prop: 'password',
     type: 'password',
@@ -179,11 +220,12 @@ export const tableOption = {
     }]
   }, {
     label: '状态',
-    prop: 'status',
+    prop: 'lockFlag',
     type: 'radio',
     slot: true,
     border: true,
     span: 24,
+    value: '0',
     dicUrl: '/admin/dict/key/user_lock_flag',
     rules: [{
       required: true,

@@ -1,19 +1,4 @@
-<!--
-  -    Copyright (c) 2018-2025, lengleng All rights reserved.
-  -
-  - Redistribution and use in source and binary forms, with or without
-  - modification, are permitted provided that the following conditions are met:
-  -
-  - Redistributions of source code must retain the above copyright notice,
-  - this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-  - notice, this list of conditions and the following disclaimer in the
-  - documentation and/or other materials provided with the distribution.
-  - Neither the name of the pig4cloud.com developer nor the names of its
-  - contributors may be used to endorse or promote products derived from
-  - this software without specific prior written permission.
-  - Author: lengleng (wangiegie@gmail.com)
-  -->
+
 
 <template>
   <div class="user">
@@ -157,11 +142,11 @@ export default {
       checkedKeys: [],
       postProps: {
         label: 'postName',
-        value: 'postId'
+        value: 'id'
       },
       roleProps: {
         label: 'roleName',
-        value: 'roleId'
+        value: 'id'
       },
       defaultProps: {
         label: 'name',
@@ -253,11 +238,11 @@ export default {
       if (['edit', 'views'].includes(type)) {
         this.role = []
         for (let i = 0; i < this.form.roleList.length; i++) {
-          this.role[i] = this.form.roleList[i].roleId
+          this.role[i] = this.form.roleList[i].id
         }
         this.post = []
         for (let i = 0; i < this.form.postList.length; i++) {
-          this.post[i] = this.form.postList[i].postId
+          this.post[i] = this.form.postList[i].id
         }
       } else if (type === 'add') {
         // 若是添加角色列表设置为空
