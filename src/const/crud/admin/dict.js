@@ -113,7 +113,7 @@ export const tableDictItemOption = {
     }]
   }, {
     label: '排序',
-    prop: 'sortOrder',
+    prop: 'orderNum',
     type: 'number',
     rules: [{
       required: true,

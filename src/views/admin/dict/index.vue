@@ -132,7 +132,8 @@ export default {
       })
     },
     rowDel: function(row) {
-      this.$confirm('是否确认删除数据类型为"' + row.type + '"的数据项?', '警告', {
+
+      this.$confirm('是否确认删除数据类型为"' + row.systemFlag + '"的数据项?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
