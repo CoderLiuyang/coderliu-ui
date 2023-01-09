@@ -27,22 +27,6 @@
             @click="$refs.crud.rowAdd()"
           >添加
           </el-button>
-<!--          <el-button-->
-<!--            class="filter-item"-->
-<!--            plain-->
-<!--            type="primary"-->
-<!--            icon="el-icon-upload"-->
-<!--            @click="$refs.excelUpload.show()"-->
-<!--          >导入-->
-<!--          </el-button>-->
-<!--          <el-button-->
-<!--            class="filter-item"-->
-<!--            plain-->
-<!--            type="primary"-->
-<!--            icon="el-icon-download"-->
-<!--            @click="exportExcel"-->
-<!--          >导出-->
-<!--          </el-button>-->
         </template>
         <template #userName="scope">
           <span>{{ scope.row.userName }}</span>
@@ -60,8 +44,8 @@
         <template #deptName="scope">
           {{ scope.row.deptName }}
         </template>
-        <template #status="scope">
-          <dict-tag :options="scope.dic" :value="scope.row.status" />
+        <template #lockFlag="scope">
+          <dict-tag :options="scope.dic" :value="scope.row.lockFlag" />
         </template>
         <template #menu="scope">
           <el-button
@@ -109,16 +93,6 @@
           ></avue-select>
         </template>
       </avue-crud>
-
-      <!--excel 模板导入 -->
-      <excel-upload
-        ref="excelUpload"
-        title="用户信息导入"
-        url="/admin/user/import"
-        temp-name="用户信息.xlsx"
-        temp-url="/admin/sys-file/local/user.xlsx"
-        @refreshDataList="handleRefreshChange"
-      ></excel-upload>
     </basic-container>
   </div>
 </template>
@@ -130,11 +104,9 @@ import { listPosts } from '@/api/admin/post'
 import { fetchTree } from '@/api/admin/dept'
 import { tableOption } from '@/const/crud/admin/user'
 import { mapGetters } from 'vuex'
-import ExcelUpload from '@/components/ExcelUpload/index.vue'
 
 export default {
-  name: 'table_user',
-  components: { ExcelUpload },
+  name: 'work_flow',
   data() {
     return {
       option: tableOption,

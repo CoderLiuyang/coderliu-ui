@@ -1,19 +1,4 @@
-<!--
-  -    Copyright (c) 2018-2025, lengleng All rights reserved.
-  -
-  - Redistribution and use in source and binary forms, with or without
-  - modification, are permitted provided that the following conditions are met:
-  -
-  - Redistributions of source code must retain the above copyright notice,
-  - this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-  - notice, this list of conditions and the following disclaimer in the
-  - documentation and/or other materials provided with the distribution.
-  - Neither the name of the pig4cloud.com developer nor the names of its
-  - contributors may be used to endorse or promote products derived from
-  - this software without specific prior written permission.
-  - Author: lengleng (wangiegie@gmail.com)
-  -->
+
 
 <template>
   <div class="app-container calendar-list-container">
@@ -38,24 +23,6 @@
             type="primary"
             icon="el-icon-edit"
             @click="$refs.crud.rowAdd()">添加
-          </el-button>
-          <el-button
-            v-if="permissions.sys_role_import_export"
-            class="filter-item"
-            plain
-            type="primary"
-            icon="el-icon-upload"
-            @click="$refs.excelUpload.show()"
-          >导入
-          </el-button>
-          <el-button
-            v-if="permissions.sys_role_import_export"
-            class="filter-item"
-            plain
-            type="primary"
-            icon="el-icon-download"
-            @click="exportExcel"
-          >导出
           </el-button>
         </template>
 
@@ -119,7 +86,7 @@
         <div class="dialog-footer">
           <el-button
             type="primary"
-            @click="updatePermession(roleId)">更 新
+            @click="updatePermession(id)">更 新
           </el-button>
           <el-button
             type="default"
@@ -199,17 +166,16 @@ export default {
       this.dialogPermissionVisible = false
     },
     handlePermission(row) {
-      fetchRoleTree(row.roleId)
+      fetchRoleTree(row.id)
         .then(response => {
           this.checkedKeys = response.data.data
           return fetchMenuTree()
-        })
-        .then(response => {
+        }).then(response => {
           this.treeData = response.data.data
           // 解析出所有的太监节点
           this.checkedKeys = this.resolveAllEunuchNodeId(this.treeData, this.checkedKeys, [])
           this.dialogPermissionVisible = true
-          this.roleId = row.roleId
+          this.id = row.id
           this.roleCode = row.roleCode
         })
     },
@@ -245,7 +211,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(function() {
-        return delObj(row.roleId)
+        return delObj(row.id)
       }).then(() => {
         this.getList(this.page)
         this.$notify.success('删除成功')
@@ -275,10 +241,10 @@ export default {
         loading()
       })
     },
-    updatePermession(roleId) {
+    updatePermession(id) {
       this.menuIds = ''
       this.menuIds = this.$refs.menuTree.getCheckedKeys().join(',').concat(',').concat(this.$refs.menuTree.getHalfCheckedKeys().join(','))
-      permissionUpd(roleId, this.menuIds).then(() => {
+      permissionUpd(id, this.menuIds).then(() => {
         this.dialogPermissionVisible = false
         this.$store.dispatch('GetMenu', { type: false })
         this.$notify.success('修改成功')

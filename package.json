@@ -1,5 +1,5 @@
 {
-  "name": "pig-ui",
+  "name": "coderliu-ui",
   "version": "3.6.3",
   "scripts": {
     "dev": "vite --host",
