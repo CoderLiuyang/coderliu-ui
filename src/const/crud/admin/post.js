@@ -4,7 +4,7 @@ export const tableOption = {
   'indexLabel': '序号',
   'indexWidth': 60,
   'stripe': true,
-  addBtn: false,
+  addBtn: true,
   'menuAlign': 'center',
   'align': 'center',
   'searchMenuSpan': 6,

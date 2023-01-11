@@ -86,7 +86,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(function() {
-        return delObj(row.postId)
+        return delObj(row.id)
       }).then(data => {
         this.$message.success('删除成功')
         this.getList(this.page)
