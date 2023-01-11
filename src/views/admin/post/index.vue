@@ -66,7 +66,6 @@ export default {
   computed: {
     ...mapGetters(['permissions']),
     permissionList() {
-      debugger
       return {
         addBtn: true,
         delBtn: this.validData(this.permissions.sys_post_del, false),
