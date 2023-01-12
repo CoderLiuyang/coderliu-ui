@@ -4,6 +4,7 @@
       <avue-crud
         ref="crud"
         v-model="form"
+
         v-model:page="page"
         :option="option"
         :table-loading="listLoading"
@@ -22,8 +23,8 @@
             text
             type="primary"
             icon="el-icon-edit"
-            @click="handleUpdate(scope.row, scope.index)"
-          >挂起
+            @click="submitProcess(scope.row, scope.index)"
+          >提交申请
           </el-button>
           <el-button
             v-if="permissions.sys_user_del"
@@ -37,98 +38,32 @@
       </avue-crud>
     </basic-container>
   </div>
-  <!-- Form -->
-  <el-button text @click="dialogFormVisible = true">
-    open a Form nested Dialog
-  </el-button>
 
-  <el-dialog v-model="dialogFormVisible" title="Shipping address">
-    <el-form :model="form">
-      <el-form-item label="Promotion name" :label-width="formLabelWidth">
-        <el-input v-model="form.name" autocomplete="off"/>
-      </el-form-item>
-      <el-form-item label="Zones" :label-width="formLabelWidth">
-        <el-select v-model="form.region" placeholder="Please select a zone">
-          <el-option label="Zone No.1" value="shanghai"/>
-          <el-option label="Zone No.2" value="beijing"/>
-        </el-select>
-      </el-form-item>
-    </el-form>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">
-          Confirm
-        </el-button>
-      </span>
-    </template>
-  </el-dialog>
+
 </template>
 
 <script>
-import {addObj, delObj, fetchList, putObj} from '@/api/workflow/process'
-import {tableOption} from '@/const/crud/workflow/process'
+import {addObj, delObj, fetchList, putObj,submitProcess} from '@/api/leave/manager'
+import {tableOption} from '@/const/crud/leave/manager'
 import {mapGetters} from 'vuex'
 
 export default {
-  name: 'process',
+  name: 'work_flow_model',
   data() {
     return {
       option: tableOption,
       treeDeptData: [],
       checkedKeys: [],
-      postProps: {
-        label: 'postName',
-        value: 'id'
-      },
-      roleProps: {
-        label: 'roleName',
-        value: 'id'
-      },
-      defaultProps: {
-        label: 'name',
-        value: 'id'
-      },
       page: {
         total: 0, // 总页数
         currentPage: 1, // 当前页数
         pageSize: 20, // 每页显示多少条,
-        isAsc: false //是否倒序
+        isAsc: false //是否倒序npom
       },
       query: {},
       list: [],
       listLoading: true,
-      post: [],
-      role: [],
       form: {},
-      postOptions: [],
-      rolesOptions: [],
-      dialogTableVisible: false,
-      dialogFormVisible: false,
-      formLabelWidth: '140px',
-
-      gridData: [
-        {
-          date: '2016-05-02',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District',
-        },
-        {
-          date: '2016-05-04',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District',
-        },
-        {
-          date: '2016-05-01',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District',
-        },
-        {
-          date: '2016-05-03',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District',
-        }
-      ]
     }
   },
   computed: {
@@ -167,9 +102,14 @@ export default {
     handleRefreshChange() {
       this.getList(this.page)
     },
-    handleUpdate(row, index) {
-      alert("挂起")
+    submitProcess(row, index) {
+      submitProcess(row.id)
+        .then(() => {
 
+          this.$notify.success('提交成功');
+        }).catch(() => {
+          loading()
+        })
 
     },
     create(row, done, loading) {
@@ -196,7 +136,24 @@ export default {
         })
     },
     deletes(row) {
-      alert("删除")
+      this.$confirm(
+        '此操作将永久删除该用户(用户名:' + row.userName + '), 是否继续?',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      ).then(() => {
+        delObj(row.id)
+          .then(() => {
+            this.getList(this.page)
+            this.$notify.success('删除成功')
+          })
+          .catch(() => {
+            this.$notify.error('删除失败')
+          })
+      })
     },
     exportExcel() {
       this.downBlobFile('/admin/user/export', this.query, 'user.xlsx')

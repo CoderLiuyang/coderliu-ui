@@ -37,6 +37,8 @@
       </avue-crud>
     </basic-container>
   </div>
+
+
 </template>
 
 <script>
