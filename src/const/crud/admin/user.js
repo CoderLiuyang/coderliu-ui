@@ -45,8 +45,8 @@ export const checkPassword = (rule, value, callback) => {
   }
   if (!value) {
     callback(new Error('请输入密码'))
-  } else if (value.length <= 6) {
-    callback(new Error('请输入6位以上密码'))
+  } else if (value.length < 6) {
+    callback(new Error('请输入6位及以上密码'))
   } else {
     callback()
   }

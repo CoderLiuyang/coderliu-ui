@@ -15,6 +15,7 @@ export function addObj(obj) {
     data: obj
   })
 }
+
 export function submitProcess(obj) {
   return request({
     url: '/workflow/bizLeave/submitProcess',

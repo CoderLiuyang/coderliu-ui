@@ -4,7 +4,6 @@
       <avue-crud
         ref="crud"
         v-model="form"
-
         v-model:page="page"
         :option="option"
         :table-loading="listLoading"
@@ -23,8 +22,8 @@
             text
             type="primary"
             icon="el-icon-edit"
-            @click="submitProcess(scope.row, scope.index)"
-          >提交申请
+            @click="handleUpdate(scope.row, scope.index)"
+          >挂起
           </el-button>
           <el-button
             v-if="permissions.sys_user_del"
@@ -43,8 +42,8 @@
 </template>
 
 <script>
-import {addObj, delObj, fetchList, putObj, submitProcess} from '@/api/leave/manager'
-import {tableOption} from '@/const/crud/leave/manager'
+import {addObj, delObj, fetchList, putObj} from '@/api/workflow/model'
+import {tableOption} from '@/const/crud/workflow/model'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -54,6 +53,18 @@ export default {
       option: tableOption,
       treeDeptData: [],
       checkedKeys: [],
+      postProps: {
+        label: 'postName',
+        value: 'id'
+      },
+      roleProps: {
+        label: 'roleName',
+        value: 'id'
+      },
+      defaultProps: {
+        label: 'name',
+        value: 'id'
+      },
       page: {
         total: 0, // 总页数
         currentPage: 1, // 当前页数
@@ -63,7 +74,11 @@ export default {
       query: {},
       list: [],
       listLoading: true,
+      post: [],
+      role: [],
       form: {},
+      postOptions: [],
+      rolesOptions: []
     }
   },
   computed: {
@@ -102,25 +117,9 @@ export default {
     handleRefreshChange() {
       this.getList(this.page)
     },
-    submitProcess(row, index) {
-      this.$confirm(
-        '是否提交' + row.title + '流程?',
-        '提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }
-      ).then(() => {
+    handleUpdate(row, index) {
+      alert("挂起")
 
-        submitProcess({id: row.id})
-          .then(() => {
-            this.$notify.success('提交成功');
-          }).catch(() => {
-          loading()
-        })
-
-      })
 
     },
     create(row, done, loading) {
@@ -147,24 +146,25 @@ export default {
         })
     },
     deletes(row) {
-      this.$confirm(
-        '此操作将永久删除该用户(用户名:' + row.userName + '), 是否继续?',
-        '提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }
-      ).then(() => {
-        delObj(row.id)
-          .then(() => {
-            this.getList(this.page)
-            this.$notify.success('删除成功')
-          })
-          .catch(() => {
-            this.$notify.error('删除失败')
-          })
-      })
+      alert("删除")
+      // this.$confirm(
+      //   '此操作将永久删除该用户(用户名:' + row.userName + '), 是否继续?',
+      //   '提示',
+      //   {
+      //     confirmButtonText: '确定',
+      //     cancelButtonText: '取消',
+      //     type: 'warning'
+      //   }
+      // ).then(() => {
+      //   delObj(row.userId)
+      //     .then(() => {
+      //       this.getList(this.page)
+      //       this.$notify.success('删除成功')
+      //     })
+      //     .catch(() => {
+      //       this.$notify.error('删除失败')
+      //     })
+      // })
     },
     exportExcel() {
       this.downBlobFile('/admin/user/export', this.query, 'user.xlsx')
