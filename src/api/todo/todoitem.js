@@ -10,7 +10,7 @@ export function fetchList(query) {
 
 export function approve(obj) {
   return request({
-    url: '/workflow/bizTodo/complete',
+    url: '/workflow/bizLeave/complete',
     method: 'post',
     data: obj
   })
