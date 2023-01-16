@@ -57,7 +57,7 @@ import {tableOption} from '@/const/crud/todo/todoitem'
 import {mapGetters} from 'vuex'
 
 export default {
-  name: 'work_flow_model',
+  name: 'history_model',
   data() {
     return {
       option: tableOption,

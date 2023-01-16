@@ -5,10 +5,10 @@ export const validateUsername = (rule, value, callback) => {
   if (!value) {
     return callback(new Error('请输入用户名'))
   }
-  const flag = new RegExp(/^([a-z\d]+?)$/).test(value)
-  if (!flag) {
-    callback(new Error('用户名支持小写英文、数字'))
-  }
+  // const flag = new RegExp(/^([a-z\d]+?)$/).test(value)
+  // if (!flag) {
+  //   callback(new Error('用户名支持小写英文、数字'))
+  // }
   isExsit({ userName: value }).then(response => {
     if (window.boxType === 'edit') callback()
     const result = response.data.data
@@ -106,7 +106,7 @@ export const tableOption = {
     span: 24,
     rules: [{
       required: true,
-      message: '请输入用户名'
+      message: '请输入登陆名'
     },
     {
       min: 3,
@@ -121,14 +121,14 @@ export const tableOption = {
       fixed: true,
       label: '用户名',
       prop: 'userName',
-      editDisabled: true,
       slot: true,
       search: true,
       span: 24,
       rules: [{
         required: true,
         message: '请输入用户名'
-      },
+      }
+      ,
         {
           min: 3,
           max: 20,
