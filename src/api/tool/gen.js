@@ -1,25 +1,10 @@
-/*
- *    Copyright (c) 2018-2025, test All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
- * Neither the name of the pig4cloud.com developer nor the names of its
- * contributors may be used to endorse or promote products derived from
- * this software without specific prior written permission.
- * Author: lengleng
- */
+
 
 import request from '@/router/axios'
 
 export function fetchList(query) {
   return request({
-    url: '/gen/generator/page',
+    url: '/generate/dsconf/page',
     method: 'get',
     params: query
   })
@@ -27,7 +12,7 @@ export function fetchList(query) {
 
 export function preview(table) {
   return request({
-    url: '/gen/generator/preview',
+    url: '/generate/generator/preview',
     method: 'get',
     params: table
   })
@@ -35,7 +20,7 @@ export function preview(table) {
 
 export function fetchDsList(query) {
   return request({
-    url: '/gen/dsconf/page',
+    url: '/generate/dsconf/page',
     method: 'get',
     params: query
   })
@@ -43,14 +28,14 @@ export function fetchDsList(query) {
 
 export function fetchSelectDsList() {
   return request({
-    url: '/gen/dsconf/list',
+    url: '/generate/dsconf/list',
     method: 'get'
   })
 }
 
 export function addObj(obj) {
   return request({
-    url: '/gen/dsconf/',
+    url: '/generate/dsconf/',
     method: 'post',
     data: obj
   })
@@ -58,21 +43,21 @@ export function addObj(obj) {
 
 export function getObj(id) {
   return request({
-    url: '/gen/dsconf/' + id,
+    url: '/generate/dsconf/' + id,
     method: 'get'
   })
 }
 
 export function delObj(id) {
   return request({
-    url: '/gen/dsconf/' + id,
+    url: '/generate/dsconf/' + id,
     method: 'delete'
   })
 }
 
 export function putObj(obj) {
   return request({
-    url: '/gen/dsconf/',
+    url: '/generate/dsconf/',
     method: 'put',
     data: obj
   })

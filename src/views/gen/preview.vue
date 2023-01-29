@@ -8,7 +8,7 @@
 
 <script>
 import Java from '@/components/Editor/index.vue'
-import { preview } from '@/api/gen/gen'
+import { preview } from '@/api/tool/gen'
 
 export default {
   name: 'Preview',

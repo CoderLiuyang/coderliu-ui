@@ -12,7 +12,7 @@
 
 
 <script>
-import { getForm, postForm } from '@/api/gen/gen'
+import { getForm, postForm } from '@/api/tool/gen'
 import { validatenull } from '@/util/validate'
 
 export default {

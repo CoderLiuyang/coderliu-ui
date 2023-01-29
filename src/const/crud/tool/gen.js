@@ -165,8 +165,8 @@ export const tableDsOption = {
       prop: 'name',
       rules: [
         { required: true, message: '请输入名称', trigger: 'blur' },
-        { max: 32, message: '长度在 32 个字符', trigger: 'blur' },
-        { validator: validateDsName, trigger: 'blur' }
+        { max: 32, message: '长度在 32 个字符', trigger: 'blur' }
+       // , { validator: validateDsName, trigger: 'blur' }
       ]
     },
     {

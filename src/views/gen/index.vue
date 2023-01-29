@@ -123,8 +123,8 @@
 </template>
 
 <script>
-import { fetchList, fetchSelectDsList, handleDown } from '@/api/gen/gen'
-import { formBatchOption, formOption, tableOption } from '@/const/crud/gen/gen'
+import { fetchList, fetchSelectDsList, handleDown } from '@/api/tool/gen'
+import { formBatchOption, formOption, tableOption } from '@/const/crud/tool/gen'
 import Preview from './preview.vue'
 
 export default {
