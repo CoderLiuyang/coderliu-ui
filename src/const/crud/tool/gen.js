@@ -40,7 +40,7 @@ export const tableOption = {
     align: 'center'
   }, {
     label: '索引',
-    prop: 'engine',
+    prop: 'ENGINE',
     align: 'center'
   }, {
     type: 'datetime',

@@ -2,9 +2,12 @@
 
 import request from '@/router/axios'
 
+/**
+ * 获取表数据分页
+ */
 export function fetchList(query) {
   return request({
-    url: '/generate/dsconf/page',
+    url: '/generate/gen/page',
     method: 'get',
     params: query
   })
@@ -18,6 +21,9 @@ export function preview(table) {
   })
 }
 
+/**
+ * 获取数据源配置
+ */
 export function fetchDsList(query) {
   return request({
     url: '/generate/dsconf/page',

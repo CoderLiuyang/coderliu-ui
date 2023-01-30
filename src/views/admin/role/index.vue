@@ -169,7 +169,6 @@ export default {
       fetchRoleTree(row.id)
         .then(response => {
           this.checkedKeys = response.data.data
-          debugger
           return fetchMenuTree()
         }).then(response => {
           this.treeData = response.data.data

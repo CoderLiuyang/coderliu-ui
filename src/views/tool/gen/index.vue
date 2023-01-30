@@ -1,5 +1,3 @@
-
-
 <template>
   <div class="execution">
     <basic-container>
@@ -8,7 +6,7 @@
           <div class="grid-content bg-purple">
             <el-select
               v-model="q.dsName"
-              placeholder="请选择数据源"
+              placeholder="master"
               @change="search"
             >
               <el-option
@@ -20,9 +18,25 @@
             </el-select>
           </div>
         </el-col>
+<!--        <el-col :span="4">-->
+<!--          <div class="grid-content bg-purple">-->
+<!--            <el-select-->
+<!--              v-model="q.serverName"-->
+<!--              placeholder="请选择生成服务"-->
+<!--              @change="searchServerName"-->
+<!--            >-->
+<!--              <el-option-->
+<!--                v-for="item in dataSourceList"-->
+<!--                :key="item.id"-->
+<!--                :label="item.name"-->
+<!--                :value="item.name"-->
+<!--              />-->
+<!--            </el-select>-->
+<!--          </div>-->
+<!--        </el-col>-->
         <el-col :span="4">
           <div class="grid-content bg-purple">
-            <el-input v-model="q.tableName" placeholder="表名称" />
+            <el-input v-model="q.tableName" placeholder="表名称"/>
           </div>
         </el-col>
         <el-col :span="12">
@@ -31,13 +45,15 @@
               type="primary"
               icon="el-icon-search"
               @click="search"
-            >搜索</el-button
+            >搜索
+            </el-button
             >
             <el-button
               type="primary"
               icon="el-icon-download"
               @click="openBatch"
-            >批量生成</el-button
+            >批量生成
+            </el-button
             >
           </div>
         </el-col>
@@ -61,13 +77,13 @@
             @click="handleDown(scope.row, scope.index)"
           >生成
           </el-button>
-          <el-button
-            text
-            type="primary"
-            icon="el-icon-edit"
-            @click="handleDesign(scope.row, scope.index)"
-          >设计
-          </el-button>
+          <!--          <el-button-->
+          <!--            text-->
+          <!--            type="primary"-->
+          <!--            icon="el-icon-edit"-->
+          <!--            @click="handleDesign(scope.row, scope.index)"-->
+          <!--          >设计-->
+          <!--          </el-button>-->
         </template>
       </avue-crud>
 
@@ -117,19 +133,19 @@
       top="5vh"
       append-to-body
     >
-      <Preview v-if="preview.open" :query-data="formData" />
+      <Preview v-if="preview.open" :query-data="formData"/>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { fetchList, fetchSelectDsList, handleDown } from '@/api/tool/gen'
-import { formBatchOption, formOption, tableOption } from '@/const/crud/tool/gen'
+import {fetchList, fetchSelectDsList, handleDown} from '@/api/tool/gen'
+import {formBatchOption, formOption, tableOption} from '@/const/crud/tool/gen'
 import Preview from './preview.vue'
 
 export default {
   name: 'CodeGenerator',
-  components: { Preview },
+  components: {Preview},
   data() {
     return {
       q: {},
@@ -175,13 +191,7 @@ export default {
         this.tableLoading = false
       })
     },
-    handleDesign: function(row) {
-      this.$router.push({
-        path: '/gen/design',
-        query: { tableName: row.tableName, dsName: this.q.dsName }
-      })
-    },
-    handleDown: function(row) {
+    handleDown: function (row) {
       this.formData.tableName = row.tableName
       this.box = true
     },
@@ -194,7 +204,7 @@ export default {
     refreshChange() {
       this.getList(this.page)
     },
-    handleView: function() {
+    handleView: function () {
       this.formData.dsName = this.q.dsName
       this.preview.open = true
     },

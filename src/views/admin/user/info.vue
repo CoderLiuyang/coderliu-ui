@@ -110,7 +110,6 @@ export default {
     const validatePass = (rule, value, callback) => {
       if (this.passwordForm.password !== '') {
         if (value !== this.passwordForm.newpassword1) {
-          debugger
           callback(new Error('两次输入密码不一致!'))
         } else {
           callback()
