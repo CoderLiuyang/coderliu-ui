@@ -1,5 +1,3 @@
-
-
 import request from '@/router/axios'
 
 /**
@@ -39,6 +37,13 @@ export function fetchSelectDsList() {
   })
 }
 
+export function fetchServerNameList() {
+  return request({
+    url: '/admin/dict/key/server_name',
+    method: 'get'
+  })
+}
+
 export function addObj(obj) {
   return request({
     url: '/generate/dsconf/',
@@ -69,6 +74,16 @@ export function putObj(obj) {
   })
 }
 
+//代码生成
+export function gen(obj) {
+  return request({
+    url: '/generate/gen/genCodeReq',
+    method: 'post',
+    data: obj
+  })
+}
+
+
 export function handleDown(table) {
   return request({
     url: '/gen/generator/code',
@@ -76,14 +91,14 @@ export function handleDown(table) {
     data: table,
     responseType: 'arraybuffer'
   }).then((response) => { // 处理返回的文件流
-    const blob = new Blob([response.data], { type: 'application/zip' })
+    const blob = new Blob([response.data], {type: 'application/zip'})
     const filename = table.tableName + '.zip'
     const link = document.createElement('a')
     link.href = URL.createObjectURL(blob)
     link.download = filename
     document.body.appendChild(link)
     link.click()
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       URL.revokeObjectURL(blob)
       document.body.removeChild(link)
     }, 0)
@@ -94,7 +109,7 @@ export function handleDown(table) {
 export function getForm(tableName, dsName) {
   return request({
     url: '/gen/form/info',
-    params: { tableName: tableName, dsName: dsName },
+    params: {tableName: tableName, dsName: dsName},
     method: 'get'
   })
 }
@@ -103,7 +118,7 @@ export function postForm(formInfo, tableName, dsId) {
   return request({
     url: '/gen/form/',
     method: 'post',
-    data: Object.assign({ formInfo, tableName, dsId })
+    data: Object.assign({formInfo, tableName, dsId})
   })
 }
 

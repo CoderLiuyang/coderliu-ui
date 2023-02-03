@@ -16,9 +16,7 @@ var validateDsName = (rule, value, callback) => {
 }
 
 export const tableOption = {
-  selection: true,
   border: true,
-  index: true,
   stripe: true,
   menuAlign: 'center',
   align: 'center',

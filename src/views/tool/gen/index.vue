@@ -6,7 +6,7 @@
           <div class="grid-content bg-purple">
             <el-select
               v-model="q.dsName"
-              placeholder="master"
+              placeholder="请选择数据源"
               @change="search"
             >
               <el-option
@@ -18,22 +18,21 @@
             </el-select>
           </div>
         </el-col>
-<!--        <el-col :span="4">-->
-<!--          <div class="grid-content bg-purple">-->
-<!--            <el-select-->
-<!--              v-model="q.serverName"-->
-<!--              placeholder="请选择生成服务"-->
-<!--              @change="searchServerName"-->
-<!--            >-->
-<!--              <el-option-->
-<!--                v-for="item in dataSourceList"-->
-<!--                :key="item.id"-->
-<!--                :label="item.name"-->
-<!--                :value="item.name"-->
-<!--              />-->
-<!--            </el-select>-->
-<!--          </div>-->
-<!--        </el-col>-->
+        <el-col :span="4">
+          <div class="grid-content bg-purple">
+            <el-select
+              v-model="q.serverName"
+              placeholder="请选择生成的项目"
+            >
+              <el-option
+                v-for="item in serverList"
+                :key="item.id"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </div>
+        </el-col>
         <el-col :span="4">
           <div class="grid-content bg-purple">
             <el-input v-model="q.tableName" placeholder="表名称"/>
@@ -46,15 +45,12 @@
               icon="el-icon-search"
               @click="search"
             >搜索
-            </el-button
-            >
-            <el-button
-              type="primary"
-              icon="el-icon-download"
-              @click="openBatch"
-            >批量生成
-            </el-button
-            >
+            </el-button>
+            <!--            <el-button-->
+            <!--              type="primary"-->
+            <!--              icon="el-icon-download"-->
+            <!--              @click="openBatch"-->
+            <!--            >批量生成</el-button>-->
           </div>
         </el-col>
       </el-row>
@@ -64,7 +60,6 @@
         :data="tableData"
         :table-loading="tableLoading"
         :option="tableOption"
-        @on-load="getList"
         @size-change="sizeChange"
         @current-change="currentChange"
         @refresh-change="refreshChange"
@@ -74,7 +69,7 @@
             text
             type="primary"
             icon="el-icon-check"
-            @click="handleDown(scope.row, scope.index)"
+            @click="genCode(scope.row, scope.index)"
           >生成
           </el-button>
           <!--          <el-button-->
@@ -87,43 +82,43 @@
         </template>
       </avue-crud>
 
-      <el-dialog v-model="box" title="生成配置" width="50%" lock-scroll>
-        <div class="pull-auto">
-          <avue-form ref="formData" v-model="formData" :option="formOption">
-            <template #menu-form="{}">
-              <el-button
-                type="primary"
-                icon="el-icon-view"
-                plain
-                @click="handleView()"
-              >预览
-              </el-button>
-              <el-button
-                type="info"
-                icon="el-icon-check"
-                plain
-                @click="gen()"
-              >下载
-              </el-button>
-            </template>
-          </avue-form>
-        </div>
-      </el-dialog>
-      <el-dialog
-        v-model="boxBatch"
-        title="批量生成"
-        width="50%"
-        lock-scroll
-      >
-        <div class="pull-auto">
-          <avue-form
-            ref="formBatchData"
-            v-model="formBatchData"
-            :option="formBatchOption"
-            @submit="batchGen"
-          />
-        </div>
-      </el-dialog>
+      <!--      <el-dialog v-model="box" title="生成配置" width="50%" lock-scroll>-->
+      <!--        <div class="pull-auto">-->
+      <!--          <avue-form ref="formData" v-model="formData" :option="formOption">-->
+      <!--            <template #menu-form="{}">-->
+      <!--              <el-button-->
+      <!--                type="primary"-->
+      <!--                icon="el-icon-view"-->
+      <!--                plain-->
+      <!--                @click="handleView()"-->
+      <!--              >预览-->
+      <!--              </el-button>-->
+      <!--              <el-button-->
+      <!--                type="info"-->
+      <!--                icon="el-icon-check"-->
+      <!--                plain-->
+      <!--                @click="gen()"-->
+      <!--              >下载-->
+      <!--              </el-button>-->
+      <!--            </template>-->
+      <!--          </avue-form>-->
+      <!--        </div>-->
+      <!--      </el-dialog>-->
+      <!--      <el-dialog-->
+      <!--        v-model="boxBatch"-->
+      <!--        title="批量生成"-->
+      <!--        width="50%"-->
+      <!--        lock-scroll-->
+      <!--      >-->
+      <!--        <div class="pull-auto">-->
+      <!--          <avue-form-->
+      <!--            ref="formBatchData"-->
+      <!--            v-model="formBatchData"-->
+      <!--            :option="formBatchOption"-->
+      <!--            @submit="batchGen"-->
+      <!--          />-->
+      <!--        </div>-->
+      <!--      </el-dialog>-->
     </basic-container>
     <!-- 预览界面 -->
     <el-dialog
@@ -139,7 +134,7 @@
 </template>
 
 <script>
-import {fetchList, fetchSelectDsList, handleDown} from '@/api/tool/gen'
+import {fetchList, fetchSelectDsList, fetchServerNameList, handleDown, gen} from '@/api/tool/gen'
 import {formBatchOption, formOption, tableOption} from '@/const/crud/tool/gen'
 import Preview from './preview.vue'
 
@@ -150,6 +145,7 @@ export default {
     return {
       q: {},
       dataSourceList: [],
+      serverList: [],
       tableData: [],
       formData: {},
       formBatchData: {},
@@ -173,6 +169,7 @@ export default {
   },
   created() {
     this.getdataSourceList()
+    this.getServerNameList()
   },
   methods: {
     getList(page) {
@@ -191,15 +188,34 @@ export default {
         this.tableLoading = false
       })
     },
-    handleDown: function (row) {
-      this.formData.tableName = row.tableName
-      this.box = true
+    //生成代码
+    genCode: function (row) {
+      this.$confirm(
+        '生成“' + row.tableName + '“, 是否继续?',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      ).then(() => {
+        const obj = {"tableName": row.tableName, "dsName": this.q.dsName,"serverName":this.q.serverName}
+        gen(obj)
+          .then(() => {
+            this.$notify.success('生成成功')
+          })
+          .catch(() => {
+            this.$notify.error('生成失败')
+          })
+      })
     },
     sizeChange(pageSize) {
       this.page.pageSize = pageSize
+      this.refreshChange();
     },
     currentChange(current) {
       this.page.currentPage = current
+      this.refreshChange();
     },
     refreshChange() {
       this.getList(this.page)
@@ -222,6 +238,11 @@ export default {
     getdataSourceList() {
       fetchSelectDsList().then(response => {
         this.dataSourceList = response.data.data
+      })
+    },
+    getServerNameList() {
+      fetchServerNameList().then(response => {
+        this.serverList = response.data.data
       })
     },
     search() {
