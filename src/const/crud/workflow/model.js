@@ -10,16 +10,15 @@ export const tableOption = {
   editBtn: false,
   delBtn: false,
   align: 'center',
-  addBtn: false,
+  addBtn: true,
   column: [{
-    fixed: true, label: 'id', prop: 'id', span: 24,slot: true
+    fixed: true, label: 'id', prop: 'id', span: 24, slot: true, hide: true, editDisplay: false,
+    addDisplay: false
   }, {
     fixed: true, label: '流程名称', prop: 'name', slot: true, search: true, span: 24,
   }, {
     fixed: true, label: '流程key', prop: 'key', slot: true, search: true, span: 24,
   }, {
-    label: '版本', prop: 'version', slot: true, span: 24
-  }, {
-    label: '状态', prop: 'suspendStateName', slot: true, span: 24
+    fixed: true, label: '创建时间', prop: 'createTime', slot: true, span: 24
   }]
 }

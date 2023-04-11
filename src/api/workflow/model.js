@@ -1,5 +1,3 @@
-
-
 import request from '@/router/axios'
 
 export function fetchList(query) {
@@ -27,7 +25,7 @@ export function getObj(id) {
 
 export function delObj(id) {
   return request({
-    url: '/admin/user/' + id,
+    url: '/workflow/model/' + id,
     method: 'delete'
   })
 }
@@ -37,5 +35,13 @@ export function putObj(obj) {
     url: '/admin/user',
     method: 'put',
     data: obj
+  })
+}
+
+//获取流程图的json
+export function getJson(id) {
+  return request({
+    url: '/workflow/model/' + id + '/json',
+    method: 'get'
   })
 }
