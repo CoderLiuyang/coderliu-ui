@@ -54,21 +54,17 @@
     </basic-container>
   </div>
 
-  <el-dialog
-    v-model="activitEditer"
-    title="Notice"
-    width="30%"
-    destroy-on-close
-    center
-  >
-
-    <template>
-      <div class="containers">
-        <div class="canvas" ref="canvas"></div>
-      </div>
-    </template>
-
-  </el-dialog>
+  <!--  <el-dialog-->
+  <!--    v-model="activitEditer"-->
+  <!--    title="编辑流程图"-->
+  <!--    width="100%"-->
+  <!--    heigh="100vh"-->
+  <!--    destroy-on-close-->
+  <!--    center-->
+  <!--  >-->
+  <!--    <div class="canvas" ref="canvas"></div>-->
+  <!--    <div class="bpmn-js-properties-panel" id="js-properties-panel"></div>-->
+  <!--  </el-dialog>-->
 </template>
 
 <script>
@@ -76,6 +72,28 @@ import {addObj, delObj, fetchList, putObj, getJson} from '@/api/workflow/model'
 import {tableOption} from '@/const/crud/workflow/model'
 import {mapGetters} from 'vuex'
 import {ref} from 'vue'
+
+
+//默认样式
+import 'bpmn-js/dist/assets/diagram-js.css'
+import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css'
+import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css'
+import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css'
+//左边工作栏的样式
+import 'bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css'
+// 引入相关的依赖
+import BpmnModeler from 'bpmn-js/lib/Modeler'
+// 工具栏相关
+import propertiesProviderModule from "bpmn-js-properties-panel/lib/provider/camunda";
+import propertiesPanelModule from "bpmn-js-properties-panel";
+import camundaModdleDescriptor from "camunda-bpmn-moddle/resources/camunda";
+//import propertiesProviderModule from 'houtaroy-bpmn-js-properties-panel-activiti/lib/provider/activiti';
+
+// 汉化文件夹
+import customTranslate from "./customTranslate";
+import {
+  xmlStr
+} from './default' // 这里是直接引用了xml字符串
 
 
 export default {
@@ -99,7 +117,8 @@ export default {
       form: {},
       postOptions: [],
       rolesOptions: [],
-      activitEditer: false
+      activitEditer: false,
+      canvas: null
     }
   },
   computed: {
@@ -139,13 +158,36 @@ export default {
       this.getList(this.page)
     },
     handleUpdate(row, index) {
-      this.activitEditer = true;
-
-      // 获取到属性ref为“canvas”的dom节点
-      const canvas = ref(null)
-      // 建模
-      this.bpmnModeler = new BpmnModeler({container: canvas})
-      this.createNewDiagram(row.id)
+      // this.activitEditer = true;
+      // const customTranslateModule = {
+      //   translate: ['value', customTranslate]
+      // };
+      // // 获取画布 element
+      // this.canvas = this.$refs.canvas;
+      // debugger
+      // console.log(this.canvas)
+      //
+      // // 创建Bpmn对象
+      // this.bpmnModeler = new BpmnModeler({
+      //   // 设置bpmn的绘图容器为上门获取的画布 element
+      //   container: this.canvas,
+      //   // 加入工具栏支持
+      //   propertiesPanel: {
+      //     parent: "#js-properties-panel"
+      //   },
+      //   additionalModules: [propertiesProviderModule, customTranslateModule],
+      //   moddleExtensions: {
+      //     camunda: camundaModdleDescriptor
+      //   }
+      // });
+      //
+      // // 初始化建模器内容
+      // this.initDiagram(xmlStr);
+      //this.createNewDiagram(row.id)
+      this.$router.push({
+        path: 'edit',
+        query: {id: row.id}
+      })
     },
     createNewDiagram(id) {
       //获取xml

@@ -30,6 +30,9 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",
     "@vue/compiler-sfc": "^3.2.39",
+    "bpmn-js": "^7.4.0",
+    "bpmn-js-properties-panel": "^0.37.2",
+    "camunda-bpmn-moddle": "^4.4.1",
     "sass": "^1.54.9",
     "vite": "^3.1.0",
     "vite-plugin-compression": "0.5.1"
