@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import {addObj, delObj, fetchList, putObj} from '@/api/workflow/process'
+import {addObj, fetchList, putObj} from '@/api/workflow/process'
 import {tableOption} from '@/const/crud/workflow/process'
 import {mapGetters} from 'vuex'
 

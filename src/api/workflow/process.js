@@ -4,7 +4,7 @@ import request from '@/router/axios'
 
 export function fetchList(query) {
   return request({
-    url: '/workflow/processDefinition/page',
+    url: '/activiti/processDefinition/page',
     method: 'get',
     params: query
   })

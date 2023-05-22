@@ -2,7 +2,7 @@ import request from '@/router/axios'
 
 export function fetchList(query) {
   return request({
-    url: '/workflow/bizTodo/historyPage',
+    url: '/activiti/bizTodo/historyPage',
     method: 'get',
     params: query
   })

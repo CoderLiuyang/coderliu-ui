@@ -2,7 +2,7 @@ import request from '@/router/axios'
 
 export function fetchList(query) {
   return request({
-    url: '/workflow/model/page',
+    url: '/activiti/model/page',
     method: 'get',
     params: query
   })
@@ -10,7 +10,7 @@ export function fetchList(query) {
 
 export function addObj(obj) {
   return request({
-    url: '/workflow/model',
+    url: '/activiti/model',
     method: 'post',
     data: obj
   })
@@ -25,14 +25,14 @@ export function getObj(id) {
 
 export function delObj(id) {
   return request({
-    url: '/workflow/model/' + id,
+    url: '/activiti/model/' + id,
     method: 'delete'
   })
 }
 
-export function putObj(obj) {
+export function putObj(obj, id) {
   return request({
-    url: '/admin/user',
+    url: '/activiti/model/' + id,
     method: 'put',
     data: obj
   })
@@ -41,7 +41,15 @@ export function putObj(obj) {
 //获取流程图的json
 export function getJson(id) {
   return request({
-    url: '/workflow/model/' + id + '/json',
+    url: '/activiti/model/' + id + '/json',
     method: 'get'
+  })
+}
+//获取流程图的json
+export function deploy(data) {
+  return request({
+    url: '/activiti/model/deploy',
+    method: 'post',
+    data: data
   })
 }

@@ -2,7 +2,7 @@ import request from '@/router/axios'
 
 export function fetchList(query) {
   return request({
-    url: '/workflow/bizTodo/page',
+    url: '/activiti/bizTodo/page',
     method: 'get',
     params: query
   })
@@ -10,7 +10,7 @@ export function fetchList(query) {
 
 export function approve(obj) {
   return request({
-    url: '/workflow/bizLeave/complete',
+    url: '/activiti/bizLeave/complete',
     method: 'post',
     data: obj
   })
