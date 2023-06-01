@@ -24,6 +24,8 @@ export const tableOption = {
   editBtn: false,
   delBtn: false,
   searchMenuSpan: 6,
+  selection: true,
+
   column: [{
     label: '表名称',
     prop: 'tableName',

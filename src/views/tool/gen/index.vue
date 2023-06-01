@@ -46,11 +46,12 @@
               @click="search"
             >搜索
             </el-button>
-            <!--            <el-button-->
-            <!--              type="primary"-->
-            <!--              icon="el-icon-download"-->
-            <!--              @click="openBatch"-->
-            <!--            >批量生成</el-button>-->
+            <el-button
+              type="primary"
+              icon="el-icon-check"
+              @click="openBatch"
+            >批量生成
+            </el-button>
           </div>
         </el-col>
       </el-row>
@@ -63,6 +64,7 @@
         @size-change="sizeChange"
         @current-change="currentChange"
         @refresh-change="refreshChange"
+        @selection-change="selectionChange"
       >
         <template #menu="scope">
           <el-button
@@ -81,44 +83,6 @@
           <!--          </el-button>-->
         </template>
       </avue-crud>
-
-      <!--      <el-dialog v-model="box" title="生成配置" width="50%" lock-scroll>-->
-      <!--        <div class="pull-auto">-->
-      <!--          <avue-form ref="formData" v-model="formData" :option="formOption">-->
-      <!--            <template #menu-form="{}">-->
-      <!--              <el-button-->
-      <!--                type="primary"-->
-      <!--                icon="el-icon-view"-->
-      <!--                plain-->
-      <!--                @click="handleView()"-->
-      <!--              >预览-->
-      <!--              </el-button>-->
-      <!--              <el-button-->
-      <!--                type="info"-->
-      <!--                icon="el-icon-check"-->
-      <!--                plain-->
-      <!--                @click="gen()"-->
-      <!--              >下载-->
-      <!--              </el-button>-->
-      <!--            </template>-->
-      <!--          </avue-form>-->
-      <!--        </div>-->
-      <!--      </el-dialog>-->
-      <!--      <el-dialog-->
-      <!--        v-model="boxBatch"-->
-      <!--        title="批量生成"-->
-      <!--        width="50%"-->
-      <!--        lock-scroll-->
-      <!--      >-->
-      <!--        <div class="pull-auto">-->
-      <!--          <avue-form-->
-      <!--            ref="formBatchData"-->
-      <!--            v-model="formBatchData"-->
-      <!--            :option="formBatchOption"-->
-      <!--            @submit="batchGen"-->
-      <!--          />-->
-      <!--        </div>-->
-      <!--      </el-dialog>-->
     </basic-container>
     <!-- 预览界面 -->
     <el-dialog
@@ -164,7 +128,8 @@ export default {
       tableLoading: false,
       tableOption: tableOption,
       formOption: formOption,
-      formBatchOption: formBatchOption
+      formBatchOption: formBatchOption,
+      tableNames: []
     }
   },
   created() {
@@ -199,7 +164,9 @@ export default {
           type: 'warning'
         }
       ).then(() => {
-        const obj = {"tableName": row.tableName, "dsName": this.q.dsName,"serverName":this.q.serverName}
+        let tableNames = []
+        tableNames.push(row.tableName)
+        const obj = {"tableName": tableNames, "dsName": this.q.dsName, "serverName": this.q.serverName}
         gen(obj)
           .then(() => {
             this.$notify.success('生成成功')
@@ -219,6 +186,13 @@ export default {
     },
     refreshChange() {
       this.getList(this.page)
+    },
+    selectionChange(item) {
+      this.tableNames = []    //每次清空
+      item.forEach((items) => {
+        this.tableNames.push(items.tableName)
+      })
+
     },
     handleView: function () {
       this.formData.dsName = this.q.dsName
@@ -249,29 +223,17 @@ export default {
       this.getList(this.page)
     },
     openBatch() {
-      if (
-        this.$refs.crud.tableSelect.length <= 1 ||
-        this.$refs.crud.tableSelect.length > 10
-      ) {
-        this.$message.error('选中表数量不合法，数量最少2个或最多为10个')
+      if (this.tableNames.length < 1) {
+        this.$message.error('选中表数量不合法，数量最少1个')
         return false
       }
-      const tableName = []
-      for (const table of this.$refs.crud.tableSelect) {
-        tableName.push(table.tableName)
-      }
-      this.formBatchData.tableName = tableName.join('-')
-      this.boxBatch = true
-    },
-    batchGen(form, done) {
-      this.formBatchData.dsName = this.q.dsName
-      handleDown(this.formBatchData)
+      const obj = {"tableName": this.tableNames, "dsName": this.q.dsName, "serverName": this.q.serverName}
+      gen(obj)
         .then(() => {
-          done()
-          this.boxBatch = false
+          this.$notify.success('生成成功')
         })
         .catch(() => {
-          done()
+          this.$notify.error('生成失败')
         })
     }
   }
