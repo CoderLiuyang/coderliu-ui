@@ -1,5 +1,5 @@
 export default {
-  version: "v3.6.3", // 控制首页显示的版本号
+  version: "v1.0.0", // 控制首页显示的版本号
   logo: "coderliu 快速开发框架",   // 侧边栏搜索的时候顶部展示的文案
   key: "coderliu", //配置主键,目前用于存储
   title: "coderliu 快速开发框架",
